@@ -10,13 +10,15 @@ import { Slide } from '@material-ui/core';
 import Message from '../Message';
 import CircularProgerss from '@material-ui/core/CircularProgress';
 import { secondary } from '../../Colors';
-import LineChart from './LineChart';
+import BarChart from './BarChart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
     display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   container: {
     display: 'flex',
@@ -54,6 +56,16 @@ const useStyles = makeStyles((theme) => ({
       // fontSize: '0.5rem',
     },
   },
+  chart: {
+    marginTop: '6rem',
+    width: '700px',
+    height: '500px',
+    [theme.breakpoints.down(470)]: {
+      width: '220px',
+      height: '180px',
+      overflowX: 'none',
+    },
+  },
 }));
 
 const FavList = ({ FavoriteData, loading, themeState }) => {
@@ -62,7 +74,6 @@ const FavList = ({ FavoriteData, loading, themeState }) => {
 
   let GetFavCityReducer = useSelector((state) => state.GetFavCityReducer);
   let { FavCityError, FavData } = GetFavCityReducer;
-  console.log(FavData);
   const GetResult = () =>
     FavoriteData.forEach((item) => {
       dispatch(FavCityAction(item.id, item.keyword));
@@ -90,7 +101,6 @@ const FavList = ({ FavoriteData, loading, themeState }) => {
       ) : (
         <div className={classes.root}>
           <Grid container className={classes.container} spacing={2}>
-            {/* <LineChart data={FavData} /> */}
             {FavData ? (
               FavData.map((item) => (
                 <Grid key={item.id} item>
@@ -99,7 +109,7 @@ const FavList = ({ FavoriteData, loading, themeState }) => {
                       id={item.data[0].HasPrecipitation}
                       className={paperClass ? classes.paper : classes.darkPaper}
                     >
-                      <FavCard data={item} />
+                      <FavCard data={item} color={paperClass} />
                     </Paper>
                   </Slide>
                 </Grid>
@@ -108,6 +118,11 @@ const FavList = ({ FavoriteData, loading, themeState }) => {
               <CircularProgerss />
             )}
           </Grid>
+          <BarChart
+            data={FavData}
+            color={paperClass}
+            className={classes.chart}
+          />
         </div>
       )}
     </>
