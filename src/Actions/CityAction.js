@@ -65,7 +65,6 @@ export const FavCityAction = (id, keyword) => async (dispatch, getState) => {
 
     const { data } = await axios.get(`${base_url}${id}?apikey=${apikey}`);
 
-    console.log(keyword);
     dispatch({
       type: FAV_CITY_SUCCESS,
       payload: {

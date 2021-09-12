@@ -47,7 +47,6 @@ export const FavouriteReducer = (state = { favourites: [] }, action) => {
 
 export const GetFavCityReducer = (state = { FavData: [] }, action) => {
   let FavData;
-  console.log(FavData);
   switch (action.type) {
     case FAV_CITY_REQUEST:
       return {

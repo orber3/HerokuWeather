@@ -1,9 +1,8 @@
-import { Box, Card, CardHeader, Grid } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { CityAction, currentCity } from '../Actions/CityAction';
+import { currentCity } from '../../Actions/CityAction';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,12 +11,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     height: '100%',
-    fontSize: '1.2rem',
+    fontSize: '1.3rem',
 
     [theme.breakpoints.down(500)]: {
       marginLeft: theme.spacing(0),
       marginRight: theme.spacing(0),
       height: '100%',
+      fontSize: '1rem',
     },
     [theme.breakpoints.down(350)]: {
       marginLeft: theme.spacing(0),

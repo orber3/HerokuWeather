@@ -5,8 +5,6 @@ export const GeoAction = (lat, long) => async (dispatch, getState) => {
   let base_url =
     'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search';
 
-  console.log(lat);
-  console.log(long);
   try {
     dispatch({
       type: GEO_REQUEST,
@@ -17,7 +15,6 @@ export const GeoAction = (lat, long) => async (dispatch, getState) => {
     const { data } = await axios.get(
       `${base_url}?apikey=${apikey}&q=${lat},${long}`
     );
-    console.log(data);
     dispatch({
       type: GEO_SUCCESS,
       payload: data,

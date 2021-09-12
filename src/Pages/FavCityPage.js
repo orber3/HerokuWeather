@@ -5,19 +5,18 @@ import {
   makeStyles,
   Switch,
 } from '@material-ui/core';
-import Header from '../Components/Header/Header';
-import SearchBox from '../Components/SearchBox';
+import SearchBox from '../Components/MainComponents/SearchBox';
 import { useDispatch, useSelector } from 'react-redux';
-import CurrentCity from '../Components/Header/CurrentCity';
+import CurrentCity from '../Components/MainComponents/CurrentCity';
 import { useEffect, useState } from 'react';
-import { CityAction, currentCity } from '../Actions/CityAction';
+import { CityAction } from '../Actions/CityAction';
 import { ForeCastAction } from '../Actions/ForeCastAction';
-import ForeCastList from '../Components/ForeCastList';
-import { addFavAction, removeFavAction } from '../Actions/FavouriteAction';
-import FavFeatures from '../Components/FavFeatures';
+import ForeCastList from '../Components/MainComponents/ForeCastList';
+import FavFeatures from '../Components/MainComponents/FavFeatures';
 import Message from '../Components/Message';
 import Clouds from '../clouds';
-import { GeoAction } from '../Actions/GeopositionAction';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const useStyles = makeStyles((theme) => ({
   grid: {
     display: 'flex',
@@ -149,7 +148,7 @@ const FavCityPage = () => {
                   current={data[0].Temperature.Metric.Value}
                 />
               ) : (
-                'loading..'
+                <CircularProgress />
               )}
             </Grid>
 
@@ -196,7 +195,7 @@ const FavCityPage = () => {
             ) : ForecastError ? (
               'Error'
             ) : (
-              'Loading..'
+              <CircularProgress />
             )}
           </Grid>
         </Box>

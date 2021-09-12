@@ -1,9 +1,7 @@
-import { addFavAction, removeFavAction } from '../Actions/FavouriteAction';
-import { useDispatch, useSelector } from 'react-redux';
+import { addFavAction, removeFavAction } from '../../Actions/FavouriteAction';
+import { useDispatch } from 'react-redux';
 import { Grid, IconButton, makeStyles } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { CallMissedSharp } from '@material-ui/icons';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 const useStyles = makeStyles((theme) => ({
   FavIcon: {

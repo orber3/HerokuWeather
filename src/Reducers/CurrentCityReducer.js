@@ -1,5 +1,3 @@
-import { CITY_FAIL, CITY_REQUEST, CITY_SUCCESS } from '../Actions/Constants';
-
 export const CurrentCityReducer = (
   state = { loading: true, id: '', keyword: '' },
   action

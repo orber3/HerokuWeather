@@ -1,4 +1,4 @@
-import { Box, Card, CardHeader, Grid, Grow } from '@material-ui/core';
+import { Box, Grid, Grow } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '100%',
-    fontSize: '1.5rem',
+    fontSize: '1.2rem',
 
     [theme.breakpoints.down(500)]: {
       marginLeft: theme.spacing(0),
@@ -59,7 +59,7 @@ const ForeCastCard = (data) => {
   temperature = temperature.toFixed(0);
   let unit = data.data.Temperature.Minimum.Unit;
   let unitText;
-  if (unit == 'C') {
+  if (unit === 'C') {
     unitText = <span> &#8451; </span>;
   } else {
     unitText = <span>&#8457;</span>;
@@ -69,7 +69,11 @@ const ForeCastCard = (data) => {
       <Grid className={classes.root}>
         <Box className={classes.title}>{day}</Box>
         <Box className={classes.text}>
-          {' '}
+          {data.data.Day.HasPrecipitation == false ? (
+            <Box className={classes.text}>{data.data.Day.IconPhrase}</Box>
+          ) : (
+            ''
+          )}{' '}
           {temperature} {unitText}
         </Box>
       </Grid>

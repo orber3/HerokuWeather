@@ -1,11 +1,9 @@
 import {
   ADD_FAV_FAIL,
-  ADD_FAV_REQUEST,
   ADD_FAV_SUCCESS,
   REMOVE_FAV_FAIL,
   REMOVE_FAV_SUCCESS,
 } from './Constants';
-import axios from 'axios';
 
 export const addFavAction = (id, keyword) => async (dispatch, getState) => {
   try {

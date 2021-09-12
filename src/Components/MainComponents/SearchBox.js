@@ -4,10 +4,9 @@ import { alpha, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CityAction, currentCity } from '../Actions/CityAction';
-import { SearchAction } from '../Actions/SearchAction';
-import debounce from 'lodash.debounce';
-import Message from './Message';
+import { currentCity } from '../../Actions/CityAction';
+import { SearchAction } from '../../Actions/SearchAction';
+import Message from '../Message';
 
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
     border: '2px groove rgba(28,110,164,0.15)',
-    borderRadius: '40px',
+    // borderRadius: '40px',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
@@ -81,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'none',
     color: 'inherit',
     cursor: 'pointer',
-    outline: 'inherit',
+    // outline: 'inherit',
     border: 'none',
     '&:hover': {
       background: '#78858B',
@@ -101,7 +100,7 @@ const SearchBox = () => {
   const dispatch = useDispatch();
 
   const SearchReducer = useSelector((state) => state.SearchReducer);
-  const { SearchError, loading, data } = SearchReducer;
+  const { SearchError, data } = SearchReducer;
 
   const dispatchSearch = useCallback(() => {
     if (keyword) {

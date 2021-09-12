@@ -26,4 +26,4 @@ export const GEO_REQUEST = 'GEO_REQUEST';
 export const GEO_SUCCESS = 'GEO_SUCCESS';
 export const GEO_FAIL = 'GEO_FAIL';
 
-export const API = 'rLC1Zl0lSKOj48JS7fXQD9iRfQlHqcGb';
+export const API = 'xfuX4MiN426mL9wcbUBwoChlh6qDLLG2';

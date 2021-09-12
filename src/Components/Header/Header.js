@@ -3,13 +3,23 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { alpha, makeStyles } from '@material-ui/core/styles';
-
+import { primary, secondary } from '../../Colors';
 import HomeIcon from '@material-ui/icons/Home';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { IconButton } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     display: 'flex',
+    appbarpalette: {
+      '&.MuiAppBar-colorPrimary': {
+        backgroundColor: primary.backGroundColor,
+      },
+      '&.MuiAppBar-colorSecondary': {
+        backgroundColor: secondary.backGroundColor,
+      },
+    },
   },
 
   title: {
@@ -19,8 +29,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   right: {
-    // display: 'none',
-
     display: 'flex',
     justifyContent: 'flex-end',
     flexGrow: 1,
@@ -28,22 +36,27 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   fav: {
-    // display: 'none',
-
     display: 'block',
     color: 'white',
     paddingLeft: `calc(1em + ${theme.spacing(2)}px)`,
   },
   homeIcon: {
-    // padding: theme.spacing(0, 2),
     height: '100%',
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
-    color: 'white',
+    color: primary.whiteColor,
     fontSize: '35px',
     justifyContent: 'center',
     paddingLeft: `calc(1em + ${theme.spacing(2)}px)`,
+    '&.homeIcon-heightPrimary': {
+      height: '#100%',
+      fontSize: 'large',
+      color: 'primary',
+    },
+    '&.homeIcon-heightSecondary': {
+      height: '#100%',
+    },
   },
   search: {
     position: 'relative',
@@ -89,9 +102,19 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchAppBar() {
   const classes = useStyles();
 
+  const ThemeReducer = useSelector((state) => state.ThemeReducer);
+  const { themeState } = ThemeReducer;
+
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar
+        color={themeState}
+        classes={{
+          colorPrimary: classes.appbarpalette,
+          colorSecondary: classes.appbarpalette,
+        }}
+        position="static"
+      >
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             Orber Weather Home Assignment
@@ -105,7 +128,10 @@ export default function SearchAppBar() {
             </Link>
 
             <Link style={{ textDecoration: 'none' }} to={'/home'}>
-              <HomeIcon className={classes.homeIcon} />
+              <IconButton>
+                {/* <HomeIcon className={classes.homeIcon} /> */}
+                <HomeIcon style={{ color: primary.whiteColor }} />
+              </IconButton>
             </Link>
           </div>
         </Toolbar>

@@ -1,6 +1,6 @@
 import { Grid, makeStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import FavList from '../Components/FavList';
+import FavList from '../Components/FavoriteComponents/FavList';
 
 const useStyles = makeStyles((theme) => ({
   grid: {

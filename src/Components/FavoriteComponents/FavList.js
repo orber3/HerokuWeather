@@ -4,15 +4,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import FavCard from './FavCard';
-import { FavCityAction } from '../Actions/CityAction';
+import { FavCityAction } from '../../Actions/CityAction';
 
 import { Slide } from '@material-ui/core';
-import Message from './Message';
+import Message from '../Message';
+import CircularProgerss from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    // minHeight: '500px',
     width: '100%',
     display: 'flex',
   },
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     minHeight: '165px',
     whiteSpace: 'nowrap',
-    width: '120px',
+    width: '180px',
     [theme.breakpoints.down(470)]: {
       marginLeft: theme.spacing(0),
       marginRight: theme.spacing(0),
@@ -45,7 +45,7 @@ const FavList = ({ FavoriteData, loading }) => {
   const dispatch = useDispatch();
 
   let GetFavCityReducer = useSelector((state) => state.GetFavCityReducer);
-  let { FavCityError, FavData, keyword } = GetFavCityReducer;
+  let { FavCityError, FavData } = GetFavCityReducer;
 
   const GetResult = () =>
     FavoriteData.forEach((item) => {
@@ -59,7 +59,7 @@ const FavList = ({ FavoriteData, loading }) => {
   return (
     <>
       {loading ? (
-        'loading'
+        <CircularProgerss />
       ) : FavCityError ? (
         <div>
           <Message variant="error" children={FavCityError} />
@@ -67,17 +67,22 @@ const FavList = ({ FavoriteData, loading }) => {
       ) : (
         <div className={classes.root}>
           <Grid container className={classes.container} spacing={2}>
-            {FavData
-              ? FavData.map((item) => (
-                  <Grid key={item.keyword} item>
-                    <Slide in={true} style={{ transitionDelay: '1500ms' }}>
-                      <Paper className={classes.paper}>
-                        <FavCard data={item} />
-                      </Paper>
-                    </Slide>
-                  </Grid>
-                ))
-              : 'loading'}
+            {FavData ? (
+              FavData.map((item) => (
+                <Grid key={item.id} item>
+                  <Slide in={true} style={{ transitionDelay: '1500ms' }}>
+                    <Paper
+                      id={item.data[0].HasPrecipitation}
+                      className={classes.paper}
+                    >
+                      <FavCard data={item} />
+                    </Paper>
+                  </Slide>
+                </Grid>
+              ))
+            ) : (
+              <CircularProgerss />
+            )}
           </Grid>
         </div>
       )}

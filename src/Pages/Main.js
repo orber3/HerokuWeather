@@ -5,19 +5,19 @@ import {
   makeStyles,
   Switch,
 } from '@material-ui/core';
-import Header from '../Components/Header/Header';
-import SearchBox from '../Components/SearchBox';
+import SearchBox from '../Components/MainComponents/SearchBox';
 import { useDispatch, useSelector } from 'react-redux';
-import CurrentCity from '../Components/Header/CurrentCity';
+import CurrentCity from '../Components/MainComponents/CurrentCity';
 import { useEffect, useState } from 'react';
 import { CityAction, currentCity } from '../Actions/CityAction';
 import { ForeCastAction } from '../Actions/ForeCastAction';
-import ForeCastList from '../Components/ForeCastList';
-import { addFavAction, removeFavAction } from '../Actions/FavouriteAction';
-import FavFeatures from '../Components/FavFeatures';
+import ForeCastList from '../Components/MainComponents/ForeCastList';
+import FavFeatures from '../Components/MainComponents/FavFeatures';
 import Message from '../Components/Message';
 import Clouds from '../clouds';
 import { GeoAction } from '../Actions/GeopositionAction';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 const useStyles = makeStyles((theme) => ({
   grid: {
     display: 'flex',
@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
     borderWidth: '3px',
     borderStyle: 'groove',
     borderColor: 'rgba(2,7,10,0.79)',
+
     overflow: 'hidden',
     [theme.breakpoints.down(700)]: {
       borderStyle: 'none',
@@ -41,6 +42,15 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+  },
+
+  boxpalette: {
+    '&.MuiBox-root-colorPrimary': {
+      borderColor: 'black',
+    },
+    '&.MuiBox-root-colorSecondary': {
+      backgroundColor: 'white',
     },
   },
   favBox: {
@@ -89,6 +99,9 @@ const Main = () => {
   const [lat, setLat] = useState();
   const [long, setLong] = useState();
 
+  const ThemeReducer = useSelector((state) => state.ThemeReducer);
+  const { themeState } = ThemeReducer;
+
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -121,7 +134,6 @@ const Main = () => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
-      console.log(long);
       if (long && lat) dispatch(GeoAction(lat, long));
     });
   }, [lat, long]);
@@ -155,9 +167,16 @@ const Main = () => {
         <Grid item md={6}>
           <SearchBox />
         </Grid>
-        <Box className={classes.box}>
+        <Box
+          className={classes.box}
+          color={themeState}
+          classes={{
+            colorPrimary: classes.box.boxpalette,
+            colorSecondary: classes.box.boxpalette,
+          }}
+        >
           {/* container for upper components */}
-          <Grid Container className={classes.upper}>
+          <Grid container className={classes.upper}>
             <Grid className={classes.currentCity} style={{}} item md={4}>
               {data && data.length > 0 ? (
                 <CurrentCity
@@ -165,7 +184,7 @@ const Main = () => {
                   current={data[0].Temperature.Metric.Value}
                 />
               ) : (
-                'loading..'
+                <CircularProgress />
               )}
             </Grid>
 
@@ -207,11 +226,12 @@ const Main = () => {
               <ForeCastList
                 data={foreData.DailyForecasts}
                 loading={loadingforeCast}
+                themeState={themeState}
               />
             ) : ForecastError ? (
               'Error'
             ) : (
-              'Loading..'
+              <CircularProgress />
             )}
           </Grid>
         </Box>
