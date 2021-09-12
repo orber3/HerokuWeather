@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 
 export const CityAction = (id, keyword) => async (dispatch, getState) => {
-  let base_url = 'http://dataservice.accuweather.com/currentconditions/v1/';
+  let base_url = 'https://dataservice.accuweather.com/currentconditions/v1/';
   try {
     dispatch({
       type: CITY_REQUEST,
