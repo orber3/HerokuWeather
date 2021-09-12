@@ -35,7 +35,7 @@ const FavFeatures = (props) => {
         <IconButton
           className={classes.FavIcon}
           onClick={handleDEl}
-          style={{ color: '#3f51b5', fontWeight: '700' }}
+          style={{ color: props.color, fontWeight: '700' }}
         >
           <div className={classes.text}>
             {' '}

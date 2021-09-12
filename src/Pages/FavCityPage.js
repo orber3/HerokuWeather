@@ -1,21 +1,25 @@
 import {
   Box,
+  colors,
   FormControlLabel,
   Grid,
   makeStyles,
   Switch,
+  Typography,
 } from '@material-ui/core';
 import SearchBox from '../Components/MainComponents/SearchBox';
 import { useDispatch, useSelector } from 'react-redux';
 import CurrentCity from '../Components/MainComponents/CurrentCity';
 import { useEffect, useState } from 'react';
-import { CityAction } from '../Actions/CityAction';
+import { CityAction, currentCity } from '../Actions/CityAction';
 import { ForeCastAction } from '../Actions/ForeCastAction';
 import ForeCastList from '../Components/MainComponents/ForeCastList';
 import FavFeatures from '../Components/MainComponents/FavFeatures';
 import Message from '../Components/Message';
 import Clouds from '../clouds';
+import { GeoAction } from '../Actions/GeopositionAction';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { primary } from '../Colors';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -33,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     borderWidth: '3px',
     borderStyle: 'groove',
     borderColor: 'rgba(2,7,10,0.79)',
+
     overflow: 'hidden',
     [theme.breakpoints.down(700)]: {
       borderStyle: 'none',
@@ -40,6 +45,15 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+  },
+
+  boxpalette: {
+    '&.MuiBox-root-colorPrimary': {
+      borderColor: 'black',
+    },
+    '&.MuiBox-root-colorSecondary': {
+      backgroundColor: 'white',
     },
   },
   favBox: {
@@ -82,11 +96,18 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: '0',
     },
   },
+  headline: {
+    paddingBottom: '10px',
+    textAlign: 'center',
+  },
 }));
 
 const FavCityPage = () => {
   const [lat, setLat] = useState();
   const [long, setLong] = useState();
+
+  const ThemeReducer = useSelector((state) => state.ThemeReducer);
+  const { themeState } = ThemeReducer;
 
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -112,12 +133,14 @@ const FavCityPage = () => {
 
   useEffect(() => {
     dispatch(CityAction(id, city));
+    dispatch(ForeCastAction(id, city, metric));
   }, [id, CurrentCityReducer]);
 
   useEffect(() => {
     dispatch(ForeCastAction(id, city, metric));
   }, [metric]);
-
+  let color;
+  themeState === 'primary' ? (color = primary.BlueColor) : (color = 'black');
   return (
     <div>
       {getCityError ? (
@@ -138,14 +161,22 @@ const FavCityPage = () => {
         <Grid item md={6}>
           <SearchBox />
         </Grid>
-        <Box className={classes.box}>
+        <Box
+          className={classes.box}
+          color={themeState}
+          classes={{
+            colorPrimary: classes.box.boxpalette,
+            colorSecondary: classes.box.boxpalette,
+          }}
+        >
           {/* container for upper components */}
-          <Grid Container className={classes.upper}>
+          <Grid container className={classes.upper}>
             <Grid className={classes.currentCity} style={{}} item md={4}>
               {data && data.length > 0 ? (
                 <CurrentCity
                   cityName={city}
                   current={data[0].Temperature.Metric.Value}
+                  color={color}
                 />
               ) : (
                 <CircularProgress />
@@ -159,6 +190,7 @@ const FavCityPage = () => {
                 id={id}
                 city={city}
                 isThisCityIsFav={isThisCityIsFav}
+                color={color}
               />
             </Grid>
           </Grid>
@@ -170,12 +202,11 @@ const FavCityPage = () => {
                 checked={metric}
                 onChange={() => setMetric(!metric)}
                 name="metric"
-                color="primary"
+                color={themeState == 'primary' ? 'primary' : 'black'}
               />
             }
             label={metric ? <span> &#8451; </span> : <span>&#8457;</span>}
           />
-          <span> &#8451; </span>
           <Grid
             item
             md={12}
@@ -188,12 +219,21 @@ const FavCityPage = () => {
           >
             {/*component that calls list of cards   */}
             {!loadingforeCast && foreData ? (
-              <ForeCastList
-                data={foreData.DailyForecasts}
-                loading={loadingforeCast}
-              />
+              <div>
+                <Box className={classes.headline}>
+                  {' '}
+                  <Typography style={{ color: color, fontWeight: '700' }}>
+                    {foreData.Headline.Text}{' '}
+                  </Typography>
+                </Box>
+                <ForeCastList
+                  data={foreData.DailyForecasts}
+                  loading={loadingforeCast}
+                  themeState={themeState}
+                />
+              </div>
             ) : ForecastError ? (
-              'Error'
+              <Message variant="error" children={ForecastError} />
             ) : (
               <CircularProgress />
             )}

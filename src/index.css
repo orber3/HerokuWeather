@@ -6,12 +6,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background: linear-gradient(165deg, #b1d2df 0%, #7899a5 100%); */
-  background: rgb(186, 213, 221);
+  /* background: rgb(186, 213, 221);
   background: linear-gradient(
     107deg,
     rgba(186, 213, 221, 1) 6%,
     rgba(236, 243, 245, 0.8211659663865546) 98%
-  );
+  ); */
+  /* background: rgb(106, 112, 113);
+  background: radial-gradient(
+    circle,
+    rgba(106, 112, 113, 1) 1%,
+    rgba(160, 173, 177, 1) 62%,
+    rgba(101, 105, 106, 0.8211659663865546) 98%
+  ); */
+  background: rgb(106, 112, 113) !important;
+  background: linear-gradient(
+    107deg,
+    rgba(186, 213, 221, 1) 6%,
+    rgba(236, 243, 245, 0.8211659663865546) 98%
+  ) !important;
+
   overflow-x: hidden;
 }
 
@@ -45,7 +59,7 @@ body {
 /* ANIMATIONS */
 
 .x1 {
-  z-index: -1;
+  z-index: 0;
   position: absolute;
   -webkit-animation: animateCloud 35s linear infinite;
   -moz-animation: animateCloud 35s linear infinite;
@@ -57,7 +71,7 @@ body {
 }
 
 .x2 {
-  z-index: -1;
+  z-index: 0;
   position: absolute;
   -webkit-animation: animateCloud 20s linear infinite;
   -moz-animation: animateCloud 20s linear infinite;
@@ -69,7 +83,7 @@ body {
 }
 
 .x3 {
-  z-index: -1;
+  z-index: 0;
   position: absolute;
   -webkit-animation: animateCloud 30s linear infinite;
   -moz-animation: animateCloud 30s linear infinite;

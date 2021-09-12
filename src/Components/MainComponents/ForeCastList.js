@@ -26,21 +26,31 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   gridItem: {
-    momo: {
-      '&.momo': {
-        color: 'red',
-      },
-    },
     appbarpalette: {
-      '&.MuiPaper-elevation3': {
+      '&.MuiPaper-elevation1': {
         backgroundColor: primary.backGroundColor,
       },
-      '&.MuiPaper-elevation3': {
+      '&.MuiPaper-root': {
         backgroundColor: secondary.backGroundColor,
       },
     },
   },
-
+  darkPaper: {
+    backgroundColor: secondary.backGroundColor,
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    minHeight: '100px',
+    whiteSpace: 'nowrap',
+    marginBottom: theme.spacing(2),
+    overflow: 'hidden',
+    minWidth: '140px',
+    width: '100%',
+    [theme.breakpoints.down(470)]: {
+      marginLeft: theme.spacing(0),
+      marginRight: theme.spacing(0),
+    },
+  },
   paper: {
     backgroundColor: '#3f51b5',
     padding: theme.spacing(2),
@@ -49,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100px',
     whiteSpace: 'nowrap',
     marginBottom: theme.spacing(2),
-    maxWidth: '140px',
     overflow: 'hidden',
     minWidth: '140px',
     width: '100%',
@@ -62,6 +71,12 @@ const useStyles = makeStyles((theme) => ({
 
 const ForeCastList = ({ data, loading, themeState }) => {
   const classes = useStyles();
+  let paperClass;
+  if (themeState === 'primary') {
+    paperClass = true;
+  } else {
+    paperClass = false;
+  }
 
   return (
     <>
@@ -74,14 +89,9 @@ const ForeCastList = ({ data, loading, themeState }) => {
               <Grid key={item.date} className={classes.gridItem} item>
                 <Paper
                   key={item.date}
-                  className={classes.paper}
+                  className={paperClass ? classes.paper : classes.darkPaper}
                   id={item.Day.HasPrecipitation.toString()}
                   color={themeState}
-                  classes={{
-                    colorPrimary: classes.appbarpalette,
-                    colorSecondary: classes.appbarpalette,
-                    // momo: 'momo',
-                  }}
                 >
                   <ForeCastCard data={item} />
                 </Paper>

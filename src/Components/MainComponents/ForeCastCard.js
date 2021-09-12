@@ -9,7 +9,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: '100%',
-    fontSize: '1.2rem',
+    fontSize: '1rem',
+    minWidth: '140px',
+    textAlign: 'center',
 
     [theme.breakpoints.down(500)]: {
       marginLeft: theme.spacing(0),
@@ -69,11 +71,11 @@ const ForeCastCard = (data) => {
       <Grid className={classes.root}>
         <Box className={classes.title}>{day}</Box>
         <Box className={classes.text}>
-          {data.data.Day.HasPrecipitation == false ? (
-            <Box className={classes.text}>{data.data.Day.IconPhrase}</Box>
-          ) : (
-            ''
-          )}{' '}
+          {/* {data.data.Day.HasPrecipitation == false ? ( */}
+          <Box className={classes.text}>{data.data.Day.IconPhrase}</Box>
+          {/* ) : ( */}
+          {/* ''
+          )}{' '} */}
           {temperature} {unitText}
         </Box>
       </Grid>

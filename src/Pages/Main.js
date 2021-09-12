@@ -1,5 +1,6 @@
 import {
   Box,
+  colors,
   FormControlLabel,
   Grid,
   makeStyles,
@@ -152,7 +153,8 @@ const Main = () => {
   useEffect(() => {
     dispatch(ForeCastAction(id, city, metric));
   }, [metric]);
-
+  let color;
+  themeState === 'primary' ? (color = primary.BlueColor) : (color = 'black');
   return (
     <div>
       {getCityError ? (
@@ -188,6 +190,7 @@ const Main = () => {
                 <CurrentCity
                   cityName={city}
                   current={data[0].Temperature.Metric.Value}
+                  color={color}
                 />
               ) : (
                 <CircularProgress />
@@ -201,6 +204,7 @@ const Main = () => {
                 id={id}
                 city={city}
                 isThisCityIsFav={isThisCityIsFav}
+                color={color}
               />
             </Grid>
           </Grid>
@@ -212,7 +216,7 @@ const Main = () => {
                 checked={metric}
                 onChange={() => setMetric(!metric)}
                 name="metric"
-                color="primary"
+                color={themeState == 'primary' ? 'primary' : 'black'}
               />
             }
             label={metric ? <span> &#8451; </span> : <span>&#8457;</span>}
@@ -232,7 +236,7 @@ const Main = () => {
               <div>
                 <Box className={classes.headline}>
                   {' '}
-                  <Typography style={{ color: '#3f51b5', fontWeight: '700' }}>
+                  <Typography style={{ color: color, fontWeight: '700' }}>
                     {foreData.Headline.Text}{' '}
                   </Typography>
                 </Box>

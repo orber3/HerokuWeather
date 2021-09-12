@@ -3,7 +3,6 @@ import FavoritePage from './Pages/FavoritePage';
 import Main from './Pages/Main';
 import Header from './Components/Header/Header';
 import FavCityPage from './Pages/FavCityPage';
-
 import React, { useState } from 'react';
 import { CssBaseline, IconButton, Grid } from '@material-ui/core';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
@@ -11,17 +10,18 @@ import { SwapHoriz } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeAction } from './Actions/ThemeAction';
-
+import SettingsBrightnessIcon from '@material-ui/icons/SettingsBrightness';
 const useStyles = makeStyles((theme) => ({
   rootApp: {
-    apppalette: {
-      '&.MuiGrid-root-colorPrimary': {
-        backgroundColor: 'red',
-      },
-      '&.MuiGrid-colorSecondary': {
-        backgroundColor: 'grey',
-      },
-    },
+    backgroundColor: ' rgb(186, 213, 221)',
+    background:
+      'linear-gradient(107deg,rgba(186, 213, 221, 1) 6%,rgba(236, 243, 245, 0.8211659663865546) 98%)',
+  },
+  darkRoot: {
+    zIndex: '0',
+    backgroundColor: 'rgb(106, 112, 113)',
+    background:
+      'radial-gradient(circle,rgba(106, 112, 113, 1) 1%,rgba(160, 173, 177, 1) 62%,rgba(101, 105, 106, 0.8211659663865546) 98%)',
   },
 }));
 const Theme = {
@@ -55,19 +55,18 @@ function App() {
 
     dispatch(ThemeAction(themeSelected));
   };
+  let bodyClass;
+  if (themeState === 'primary') {
+    bodyClass = true;
+  } else {
+    bodyClass = false;
+  }
 
   return (
     <div className={classes.rootApp}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Grid
-          // className={classes.rootApp}
-          color={themeState}
-          classes={{
-            colorPrimary: classes.apppalette,
-            colorSecondary: classes.apppalette,
-          }}
-        >
+        <Grid className={bodyClass ? classes.rootApp : classes.darkRoot}>
           <Router>
             <Header />
             <IconButton
@@ -77,7 +76,7 @@ function App() {
                 changeTheme();
               }}
             >
-              <SwapHoriz />
+              <SettingsBrightnessIcon fontSize="large" />
             </IconButton>
             <Switch>
               <Route exact path="/" component={Main} />

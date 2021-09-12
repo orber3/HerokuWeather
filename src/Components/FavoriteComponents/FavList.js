@@ -9,6 +9,7 @@ import { FavCityAction } from '../../Actions/CityAction';
 import { Slide } from '@material-ui/core';
 import Message from '../Message';
 import CircularProgerss from '@material-ui/core/CircularProgress';
+import { secondary } from '../../Colors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +23,20 @@ const useStyles = makeStyles((theme) => ({
     gridGap: theme.spacing(10),
     [theme.breakpoints.down(650)]: {
       gridGap: theme.spacing(5),
+    },
+  },
+  darkPaper: {
+    backgroundColor: secondary.backGroundColor,
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    minHeight: '165px',
+    whiteSpace: 'nowrap',
+    width: '180px',
+    [theme.breakpoints.down(470)]: {
+      marginLeft: theme.spacing(0),
+      marginRight: theme.spacing(0),
+      // fontSize: '0.5rem',
     },
   },
   paper: {
@@ -40,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FavList = ({ FavoriteData, loading }) => {
+const FavList = ({ FavoriteData, loading, themeState }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -56,6 +71,13 @@ const FavList = ({ FavoriteData, loading }) => {
     GetResult();
   }, []);
 
+  let paperClass;
+
+  if (themeState === 'primary') {
+    paperClass = true;
+  } else {
+    paperClass = false;
+  }
   return (
     <>
       {loading ? (
@@ -73,7 +95,7 @@ const FavList = ({ FavoriteData, loading }) => {
                   <Slide in={true} style={{ transitionDelay: '1500ms' }}>
                     <Paper
                       id={item.data[0].HasPrecipitation}
-                      className={classes.paper}
+                      className={paperClass ? classes.paper : classes.darkPaper}
                     >
                       <FavCard data={item} />
                     </Paper>
