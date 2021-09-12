@@ -80,9 +80,9 @@ function App() {
               <SwapHoriz />
             </IconButton>
             <Switch>
-              <Route exact path="" component={Main} />
+              <Route exact path="/" component={Main} />
               <Route path="/home" component={Main} />
-              <Route path="/favorite" component={FavoritePage} exact />
+              <Route path="/favorite/" component={FavoritePage} />
               <Route path="/city" component={FavCityPage} exact />
             </Switch>
           </Router>
