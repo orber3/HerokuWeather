@@ -26,11 +26,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   gridItem: {
+    momo: {
+      '&.momo': {
+        color: 'red',
+      },
+    },
     appbarpalette: {
-      '&.MuiPaper-colorPrimary': {
+      '&.MuiPaper-elevation3': {
         backgroundColor: primary.backGroundColor,
       },
-      '&.MuiPaper-colorSecondary': {
+      '&.MuiPaper-elevation3': {
         backgroundColor: secondary.backGroundColor,
       },
     },
@@ -75,6 +80,7 @@ const ForeCastList = ({ data, loading, themeState }) => {
                   classes={{
                     colorPrimary: classes.appbarpalette,
                     colorSecondary: classes.appbarpalette,
+                    // momo: 'momo',
                   }}
                 >
                   <ForeCastCard data={item} />
