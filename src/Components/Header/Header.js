@@ -19,22 +19,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   right: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'flex',
-      justifyContent: 'flex-end',
-      flexGrow: 1,
-      lineHeight: 1.6,
-      alignItems: 'center',
-    },
+    // display: 'none',
+
+    display: 'flex',
+    justifyContent: 'flex-end',
+    flexGrow: 1,
+    lineHeight: 1.6,
+    alignItems: 'center',
   },
   fav: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-      color: 'white',
-      paddingLeft: `calc(1em + ${theme.spacing(2)}px)`,
-    },
+    // display: 'none',
+
+    display: 'block',
+    color: 'white',
+    paddingLeft: `calc(1em + ${theme.spacing(2)}px)`,
   },
   homeIcon: {
     // padding: theme.spacing(0, 2),
@@ -100,9 +98,9 @@ export default function SearchAppBar() {
           </Typography>
           {/* <SearchBox /> */}
           <div className={classes.right}>
-            <Link style={{ textDecoration: 'none' }} to={'/fav'}>
+            <Link style={{ textDecoration: 'none' }} to={'/favorite'}>
               <Typography className={classes.fav} variant="h6" noWrap>
-                Favourite
+                Favourites
               </Typography>
             </Link>
 

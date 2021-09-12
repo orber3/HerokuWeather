@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = () => {
+const FavCityPage = () => {
   const [lat, setLat] = useState();
   const [long, setLong] = useState();
 
@@ -104,31 +104,15 @@ const Main = () => {
   const FavouriteReducer = useSelector((state) => state.FavouriteReducer);
   const { favourites } = FavouriteReducer;
 
-  const GeoReducer = useSelector((state) => state.GeoReducer);
-  const { geoData, loadingGeo } = GeoReducer;
-
   const [metric, setMetric] = useState(true);
   let isThisCityIsFav = false;
 
   if (favourites.some((item) => item.id === id)) {
     isThisCityIsFav = true;
   }
-  useEffect(() => {
-    if (geoData) dispatch(currentCity(geoData.Key, geoData.LocalizedName));
-  }, [geoData]);
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-      console.log(long);
-      if (long && lat) dispatch(GeoAction(lat, long));
-    });
-  }, [lat, long]);
 
   useEffect(() => {
     dispatch(CityAction(id, city));
-    // dispatch(ForeCastAction(id,city , metric));
   }, [id, CurrentCityReducer]);
 
   useEffect(() => {
@@ -192,6 +176,7 @@ const Main = () => {
             }
             label={metric ? <span> &#8451; </span> : <span>&#8457;</span>}
           />
+          <span> &#8451; </span>
           <Grid
             item
             md={12}
@@ -220,4 +205,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default FavCityPage;

@@ -4,8 +4,10 @@ import { alpha, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CityAction } from '../Actions/CityAction';
+import { CityAction, currentCity } from '../Actions/CityAction';
 import { SearchAction } from '../Actions/SearchAction';
+import debounce from 'lodash.debounce';
+import Message from './Message';
 
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
@@ -13,14 +15,17 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
+
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
+    '&:invalid': {
+      border: 'red solid 2px',
+    },
     [theme.breakpoints.up('sm')]: {
-      width: '12ch',
+      width: '30vh',
       '&:focus': {
-        width: '20ch',
+        width: '35vh',
       },
     },
   },
@@ -30,14 +35,14 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     pointerEvents: 'none',
     display: 'flex',
-
-    alignItems: 'start',
+    alignItems: 'center',
     lineHeight: '1.6',
     justifyContent: 'center',
   },
   search: {
     position: 'relative',
-
+    border: '2px groove rgba(28,110,164,0.15)',
+    borderRadius: '40px',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
@@ -45,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     },
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(11),
+      marginLeft: theme.spacing(3),
       width: 'auto',
     },
   },
@@ -82,6 +87,11 @@ const useStyles = makeStyles((theme) => ({
       background: '#78858B',
     },
   },
+  input: {
+    '&:invalid': {
+      border: 'red solid 2px',
+    },
+  },
 }));
 
 const SearchBox = () => {
@@ -91,15 +101,14 @@ const SearchBox = () => {
   const dispatch = useDispatch();
 
   const SearchReducer = useSelector((state) => state.SearchReducer);
-  const { loading, data } = SearchReducer;
+  const { SearchError, loading, data } = SearchReducer;
 
   const dispatchSearch = useCallback(() => {
-    setTimeout(function () {
-      // dispatch(SearchAction(keyword));
-      console.log('search');
-    }, 1500);
-    setVisible(true);
-  }, []);
+    if (keyword) {
+      dispatch(SearchAction(keyword));
+      setVisible(true);
+    }
+  }, [keyword]);
 
   useEffect(() => {
     dispatchSearch();
@@ -112,24 +121,26 @@ const SearchBox = () => {
   const handleClick = (e) => {
     setKeyword(e);
 
-    dispatch(CityAction(data[0].Key, e));
+    dispatch(currentCity(data[0].Key, e));
     setVisible(false);
   };
 
   return (
     <div className={classes.search}>
+      {SearchError ? <Message variant="error" children={SearchError} /> : ''}
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
       <InputBase
-        placeholder="Search for city..."
+        placeholder="Search for a city..."
         onChange={handleChange}
         value={keyword}
+        inputProps={{ className: classes.input, pattern: '[a-z]{1,15}' }}
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput,
         }}
-        inputProps={{ 'aria-label': 'search' }}
+        // inputProps={{ 'aria-label': 'search' }}
       />
 
       {data && data.length && data.length > 0 && visibile === true ? (
@@ -138,12 +149,10 @@ const SearchBox = () => {
             <p key={item.key} className={classes.autoItem}>
               <button
                 className={classes.button}
-                onClick={() =>
-                  handleClick(item.AdministrativeArea.LocalizedName)
-                }
+                onClick={() => handleClick(item.LocalizedName)}
                 key={index}
               >
-                {item.AdministrativeArea.LocalizedName}
+                {item.LocalizedName}
               </button>
             </p>
           ))}
@@ -156,21 +165,3 @@ const SearchBox = () => {
 };
 
 export default SearchBox;
-
-// const dummyinfo = {
-//   LocalObservationDateTime:"2021-09-10T09:46:00+03:00",
-// EpochTime:1631256360,
-// WeatherText:"Partly sunny",
-// WeatherIcon:3,
-// HasPrecipitation:false,
-// PrecipitationType:null,
-// IsDayTime:true,
-// Value:28.9,
-// Unit:"C",
-// UnitType:17,
-// Value:84,
-// Unit:"F",
-// UnitType:18,
-// MobileLink:"http://www.accuweather.com/en/il/tel-aviv/215854/current-weather/215854?lang=en-us",
-// Link:"http://www.accuweather.com/en/il/tel-aviv/215854/current-weather/215854?lang=en-us"
-// }

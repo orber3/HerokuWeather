@@ -19,7 +19,7 @@ export const SearchReducer = (state = { loading: true, data: {} }, action) => {
     case SEARCH_FAIL:
       return {
         loadingInfo: false,
-        errorInfo: action.payload,
+        SearchError: action.payload,
       };
 
     default:

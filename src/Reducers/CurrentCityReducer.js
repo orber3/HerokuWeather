@@ -1,7 +1,7 @@
 import { CITY_FAIL, CITY_REQUEST, CITY_SUCCESS } from '../Actions/Constants';
 
 export const CurrentCityReducer = (
-  state = { loading: true, id: {}, keyword: 'Tel Aviv' },
+  state = { loading: true, id: '', keyword: '' },
   action
 ) => {
   switch (action.type) {
@@ -9,7 +9,7 @@ export const CurrentCityReducer = (
       return {
         loadingCity: false,
         id: action.payload,
-        keyword: action.keyword,
+        city: action.keyword,
       };
 
     default:

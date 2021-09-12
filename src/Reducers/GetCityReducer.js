@@ -19,7 +19,7 @@ export const GetCityReducer = (
     case CITY_FAIL:
       return {
         loadingCity: false,
-        errorInfo: action.payload,
+        getCityError: action.payload,
       };
 
     default:

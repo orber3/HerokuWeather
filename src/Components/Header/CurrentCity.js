@@ -3,9 +3,13 @@ import { Box, Typography } from '@material-ui/core';
 const CurrentCity = ({ cityName, current }) => {
   return (
     <Box>
-      <Typography>{cityName}</Typography>
+      <Typography style={{ color: '#3f51b5', fontWeight: '700' }}>
+        {cityName}
+      </Typography>
 
-      <Typography>{current} 'c</Typography>
+      <Typography style={{ color: '#3f51b5', fontWeight: '700' }}>
+        {current} <span> &#8451; </span>
+      </Typography>
     </Box>
   );
 };
