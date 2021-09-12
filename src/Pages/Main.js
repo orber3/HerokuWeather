@@ -4,6 +4,7 @@ import {
   Grid,
   makeStyles,
   Switch,
+  Typography,
 } from '@material-ui/core';
 import SearchBox from '../Components/MainComponents/SearchBox';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +18,7 @@ import Message from '../Components/Message';
 import Clouds from '../clouds';
 import { GeoAction } from '../Actions/GeopositionAction';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { primary } from '../Colors';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -93,6 +95,10 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: '0',
     },
   },
+  headline: {
+    paddingBottom: '10px',
+    textAlign: 'center',
+  },
 }));
 
 const Main = () => {
@@ -140,7 +146,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(CityAction(id, city));
-    // dispatch(ForeCastAction(id,city , metric));
+    dispatch(ForeCastAction(id, city, metric));
   }, [id, CurrentCityReducer]);
 
   useEffect(() => {
@@ -223,13 +229,21 @@ const Main = () => {
           >
             {/*component that calls list of cards   */}
             {!loadingforeCast && foreData ? (
-              <ForeCastList
-                data={foreData.DailyForecasts}
-                loading={loadingforeCast}
-                themeState={themeState}
-              />
+              <div>
+                <Box className={classes.headline}>
+                  {' '}
+                  <Typography style={{ color: '#3f51b5', fontWeight: '700' }}>
+                    {foreData.Headline.Text}{' '}
+                  </Typography>
+                </Box>
+                <ForeCastList
+                  data={foreData.DailyForecasts}
+                  loading={loadingforeCast}
+                  themeState={themeState}
+                />
+              </div>
             ) : ForecastError ? (
-              'Error'
+              <Message variant="error" children={ForecastError} />
             ) : (
               <CircularProgress />
             )}

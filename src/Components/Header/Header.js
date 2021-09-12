@@ -86,7 +86,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -129,7 +128,6 @@ export default function SearchAppBar() {
 
             <Link style={{ textDecoration: 'none' }} to={'/home'}>
               <IconButton>
-                {/* <HomeIcon className={classes.homeIcon} /> */}
                 <HomeIcon style={{ color: primary.whiteColor }} />
               </IconButton>
             </Link>

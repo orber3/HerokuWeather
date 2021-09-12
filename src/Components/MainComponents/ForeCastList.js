@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import ForeCastCard from './ForeCastCard';
 import { primary, secondary } from '../../Colors';
 import CircularProgerss from '@material-ui/core/CircularProgress';
+import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +25,16 @@ const useStyles = makeStyles((theme) => ({
       gridGap: theme.spacing(5),
     },
   },
+  gridItem: {
+    appbarpalette: {
+      '&.MuiPaper-colorPrimary': {
+        backgroundColor: primary.backGroundColor,
+      },
+      '&.MuiPaper-colorSecondary': {
+        backgroundColor: secondary.backGroundColor,
+      },
+    },
+  },
 
   paper: {
     backgroundColor: '#3f51b5',
@@ -40,17 +51,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(470)]: {
       marginLeft: theme.spacing(0),
       marginRight: theme.spacing(0),
-    },
-    appbarpalette: {
-      'MuiPaper-colorPrimary': {
-        backgroundColor: primary.backGroundColor,
-      },
-      '&.MuiPaper-colorPrimary': {
-        backgroundColor: primary.backGroundColor,
-      },
-      '&.MuiPaper-colorPrimary': {
-        backgroundColor: secondary.backGroundColor,
-      },
     },
   },
 }));
@@ -72,6 +72,10 @@ const ForeCastList = ({ data, loading, themeState }) => {
                   className={classes.paper}
                   id={item.Day.HasPrecipitation.toString()}
                   color={themeState}
+                  classes={{
+                    colorPrimary: classes.appbarpalette,
+                    colorSecondary: classes.appbarpalette,
+                  }}
                 >
                   <ForeCastCard data={item} />
                 </Paper>

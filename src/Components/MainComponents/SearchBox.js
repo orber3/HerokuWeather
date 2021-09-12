@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { currentCity } from '../../Actions/CityAction';
 import { SearchAction } from '../../Actions/SearchAction';
 import Message from '../Message';
+import { useForm, Controller } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 
 const useStyles = makeStyles((theme) => ({
   inputRoot: {
@@ -99,6 +101,15 @@ const SearchBox = () => {
   const [visibile, setVisible] = useState(false);
   const dispatch = useDispatch();
 
+  const {
+    // handleSubmit,
+    control,
+    register,
+    formState: { errors },
+  } = useForm({
+    mode: 'all',
+    rules: { required: true },
+  });
   const SearchReducer = useSelector((state) => state.SearchReducer);
   const { SearchError, data } = SearchReducer;
 
@@ -121,6 +132,7 @@ const SearchBox = () => {
     setKeyword(e);
 
     dispatch(currentCity(data[0].Key, e));
+    setKeyword(null);
     setVisible(false);
   };
 
@@ -130,17 +142,37 @@ const SearchBox = () => {
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
-      <InputBase
-        placeholder="Search for a city..."
-        onChange={handleChange}
-        value={keyword}
-        inputProps={{ className: classes.input, pattern: '[a-z]{1,15}' }}
-        classes={{
-          root: classes.inputRoot,
-          input: classes.inputInput,
-        }}
-        // inputProps={{ 'aria-label': 'search' }}
-      />
+      {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+      <form>
+        <Controller
+          name={'search'}
+          control={control}
+          render={({ search }) => (
+            <InputBase
+              {...search}
+              placeholder="Search for a city..."
+              value={keyword}
+              name="search"
+              autoComplete="off"
+              inputProps={{
+                className: classes.input,
+                // pattern: '/^[a-zA-Z]+$/',
+              }}
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              {...register('search', {
+                pattern: {
+                  value: /^[a-zA-Z]+$/,
+                  message: 'Only English letters is allowed',
+                },
+              })}
+              onChange={handleChange}
+            />
+          )}
+        />
+      </form>
 
       {data && data.length && data.length > 0 && visibile === true ? (
         <ul className={classes.autocomplete}>
@@ -149,6 +181,7 @@ const SearchBox = () => {
               <button
                 className={classes.button}
                 onClick={() => handleClick(item.LocalizedName)}
+                type="submit"
                 key={index}
               >
                 {item.LocalizedName}
@@ -159,6 +192,7 @@ const SearchBox = () => {
       ) : (
         ''
       )}
+      <ErrorMessage errors={errors} name="search" />
     </div>
   );
 };
