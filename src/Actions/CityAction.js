@@ -55,7 +55,7 @@ export const currentCity = (id, keyword) => async (dispatch, getState) => {
 };
 
 export const FavCityAction = (id, keyword) => async (dispatch, getState) => {
-  let base_url = 'http://dataservice.accuweather.com/currentconditions/v1/';
+  let base_url = 'https://dataservice.accuweather.com/currentconditions/v1/';
   try {
     dispatch({
       type: FAV_CITY_REQUEST,

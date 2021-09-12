@@ -7,10 +7,6 @@ import {
 
 export const addFavAction = (id, keyword) => async (dispatch, getState) => {
   try {
-    // dispatch({
-    //   type: ADD_FAV_REQUEST,
-    // });
-
     dispatch({
       type: ADD_FAV_SUCCESS,
       payload: {

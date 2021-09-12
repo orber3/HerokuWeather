@@ -9,7 +9,7 @@ import axios from 'axios';
 export const ForeCastAction =
   (id, city, metric) => async (dispatch, getState) => {
     let base_url =
-      'http://dataservice.accuweather.com/forecasts/v1/daily/5day/';
+      'https://dataservice.accuweather.com/forecasts/v1/daily/5day/';
     try {
       dispatch({
         type: FORECAST_REQUEST,

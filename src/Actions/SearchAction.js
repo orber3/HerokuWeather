@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const SearchAction = (q) => async (dispatch, getState) => {
   let base_url =
-    'http://dataservice.accuweather.com/locations/v1/cities/autocomplete';
+    'https://dataservice.accuweather.com/locations/v1/cities/autocomplete';
   try {
     dispatch({
       type: SEARCH_REQUEST,

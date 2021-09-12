@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const GeoAction = (lat, long) => async (dispatch, getState) => {
   let base_url =
-    'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search';
+    'https://dataservice.accuweather.com/locations/v1/cities/geoposition/search';
 
   try {
     dispatch({
