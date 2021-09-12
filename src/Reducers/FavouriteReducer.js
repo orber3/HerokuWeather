@@ -6,6 +6,7 @@ import {
   FAV_CITY_REQUEST,
   FAV_CITY_SUCCESS,
   FAV_CITY_FAIL,
+  REMOVE_FAV_CITY,
 } from '../Actions/Constants';
 
 export const FavouriteReducer = (state = { favourites: [] }, action) => {
@@ -46,7 +47,7 @@ export const FavouriteReducer = (state = { favourites: [] }, action) => {
 };
 
 export const GetFavCityReducer = (state = { FavData: [] }, action) => {
-  let FavData;
+  console.log(action.payload);
   switch (action.type) {
     case FAV_CITY_REQUEST:
       return {
@@ -77,6 +78,12 @@ export const GetFavCityReducer = (state = { FavData: [] }, action) => {
         FavCityError: action.payload,
       };
 
+    case REMOVE_FAV_CITY:
+      return {
+        LoadingFavCity: false,
+        ...state,
+        FavData: state.FavData.filter((item) => item.id != action.payload),
+      };
     default:
       return state;
   }

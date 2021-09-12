@@ -10,6 +10,7 @@ import { Slide } from '@material-ui/core';
 import Message from '../Message';
 import CircularProgerss from '@material-ui/core/CircularProgress';
 import { secondary } from '../../Colors';
+import LineChart from './LineChart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,7 +62,7 @@ const FavList = ({ FavoriteData, loading, themeState }) => {
 
   let GetFavCityReducer = useSelector((state) => state.GetFavCityReducer);
   let { FavCityError, FavData } = GetFavCityReducer;
-
+  console.log(FavData);
   const GetResult = () =>
     FavoriteData.forEach((item) => {
       dispatch(FavCityAction(item.id, item.keyword));
@@ -89,6 +90,7 @@ const FavList = ({ FavoriteData, loading, themeState }) => {
       ) : (
         <div className={classes.root}>
           <Grid container className={classes.container} spacing={2}>
+            {/* <LineChart data={FavData} /> */}
             {FavData ? (
               FavData.map((item) => (
                 <Grid key={item.id} item>

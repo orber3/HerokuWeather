@@ -21,9 +21,10 @@ export const REMOVE_FAV_FAIL = 'REMOVE_FAV_FAIL';
 export const FAV_CITY_REQUEST = 'FAV_CITY_REQUEST';
 export const FAV_CITY_SUCCESS = 'FAV_CITY_SUCCESS';
 export const FAV_CITY_FAIL = 'FAV_CITY_FAIL';
+export const REMOVE_FAV_CITY = 'REMOVE_FAV_CITY';
 
 export const GEO_REQUEST = 'GEO_REQUEST';
 export const GEO_SUCCESS = 'GEO_SUCCESS';
 export const GEO_FAIL = 'GEO_FAIL';
 
-export const API = 'AT9Cg2nQcUJck8U99qeI4bxF0RN007aI';
+export const API = 'XlNPkDO1AKVROfQXWGWAsGz5ICmKcMdm';

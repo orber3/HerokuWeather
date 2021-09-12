@@ -1,4 +1,8 @@
-import { addFavAction, removeFavAction } from '../../Actions/FavouriteAction';
+import {
+  addFavAction,
+  removeFavAction,
+  removeFavcityAction,
+} from '../../Actions/FavouriteAction';
 import { useDispatch } from 'react-redux';
 import { Grid, IconButton, makeStyles } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -21,12 +25,14 @@ const FavFeatures = (props) => {
 
   const dispatch = useDispatch();
 
-  const handleFav = () => {
+  const handleFav = (e) => {
     dispatch(addFavAction(props.id, props.city));
   };
 
   const handleDEl = () => {
     dispatch(removeFavAction(props.id, props.city));
+    dispatch(removeFavcityAction(props.id, props.city));
+    console.log(props.id);
   };
 
   return (
