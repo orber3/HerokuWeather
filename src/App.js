@@ -81,9 +81,9 @@ function App() {
             </IconButton>
             <Switch>
               <Route exact path="" component={Main} />
-              <Route path="/home" component={Main} />
-              <Route path="/favorite" component={FavoritePage} exact />
-              <Route path="/city" component={FavCityPage} exact />
+              <Route path="home" component={Main} />
+              <Route path="favorite" component={FavoritePage} exact />
+              <Route path="city" component={FavCityPage} exact />
             </Switch>
           </Router>
         </Grid>
