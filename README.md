@@ -1,7 +1,7 @@
 hey,
 thanks for an exciting home assignment !
 
-i have completed all of the assingment specs and bounus.
+i have completed all of the assingment specs and bonus.
 i have added a few unit tests,
 animation : for the cards and the clouds.
 cards - grow in.
