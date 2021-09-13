@@ -1,6 +1,5 @@
 import {
   Box,
-  colors,
   FormControlLabel,
   Grid,
   makeStyles,
@@ -11,13 +10,12 @@ import SearchBox from '../Components/MainComponents/SearchBox';
 import { useDispatch, useSelector } from 'react-redux';
 import CurrentCity from '../Components/MainComponents/CurrentCity';
 import { useEffect, useState } from 'react';
-import { CityAction, currentCity } from '../Actions/CityAction';
+import { CityAction } from '../Actions/CityAction';
 import { ForeCastAction } from '../Actions/ForeCastAction';
 import ForeCastList from '../Components/MainComponents/ForeCastList';
 import FavFeatures from '../Components/MainComponents/FavFeatures';
 import Message from '../Components/Message';
 import Clouds from '../clouds';
-import { GeoAction } from '../Actions/GeopositionAction';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { primary } from '../Colors';
 
@@ -103,9 +101,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FavCityPage = () => {
-  const [lat, setLat] = useState();
-  const [long, setLong] = useState();
-
   const ThemeReducer = useSelector((state) => state.ThemeReducer);
   const { themeState } = ThemeReducer;
 
@@ -113,10 +108,10 @@ const FavCityPage = () => {
   const dispatch = useDispatch();
 
   const GetCityReducer = useSelector((state) => state.GetCityReducer);
-  const { getCityError, data, keyword } = GetCityReducer;
+  const { getCityError, data } = GetCityReducer;
 
   const CurrentCityReducer = useSelector((state) => state.CurrentCityReducer);
-  const { loading, id, city } = CurrentCityReducer;
+  const { id, city } = CurrentCityReducer;
 
   const ForeCastReducer = useSelector((state) => state.ForeCastReducer);
   const { ForecastError, foreData, loadingforeCast } = ForeCastReducer;

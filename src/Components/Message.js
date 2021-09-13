@@ -31,11 +31,10 @@ const Message = ({ variant, children }) => {
           onClose={handleClose}
           severity={variant}
         >
-          {children}{' '}
+          <p>{children}</p>
+          {children == 'Network Error' ? ' API limit reached?' : ''}
         </Alert>
       </Snackbar>
-
-      {/* <Alert severity={variant}>{children}</Alert>; */}
     </div>
   );
 };

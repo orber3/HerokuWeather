@@ -5,16 +5,14 @@ import Grid from '@material-ui/core/Grid';
 import ForeCastCard from './ForeCastCard';
 import { primary, secondary } from '../../Colors';
 import CircularProgerss from '@material-ui/core/CircularProgress';
-import { Box } from '@material-ui/core';
+import { Grow } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    // minHeight: '500px',
     width: '100%',
     display: 'flex',
     padding: '12px',
-    // paddingRight: '30px',
   },
   container: {
     display: 'flex',
@@ -87,14 +85,16 @@ const ForeCastList = ({ data, loading, themeState }) => {
           <Grid container className={classes.container} spacing={2}>
             {data.map((item) => (
               <Grid key={item.date} className={classes.gridItem} item>
-                <Paper
-                  key={item.date}
-                  className={paperClass ? classes.paper : classes.darkPaper}
-                  id={item.Day.HasPrecipitation.toString()}
-                  color={themeState}
-                >
-                  <ForeCastCard data={item} />
-                </Paper>
+                <Grow in={true} style={{ transitionDelay: '75ms' }}>
+                  <Paper
+                    key={item.date}
+                    className={paperClass ? classes.paper : classes.darkPaper}
+                    id={item.Day.HasPrecipitation.toString()}
+                    color={themeState}
+                  >
+                    <ForeCastCard data={item} />
+                  </Paper>
+                </Grow>
               </Grid>
             ))}
           </Grid>

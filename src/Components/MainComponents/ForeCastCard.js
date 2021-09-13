@@ -1,4 +1,4 @@
-import { Box, Grid, Grow } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
       marginRight: theme.spacing(0),
       alignItems: 'center',
       height: '100%',
-      // width: '175px',
     },
   },
   title: {
@@ -67,19 +66,15 @@ const ForeCastCard = (data) => {
     unitText = <span>&#8457;</span>;
   }
   return (
-    <Grow in={true}>
-      <Grid className={classes.root}>
-        <Box className={classes.title}>{day}</Box>
-        <Box className={classes.text}>
-          {/* {data.data.Day.HasPrecipitation == false ? ( */}
-          <Box className={classes.text}>{data.data.Day.IconPhrase}</Box>
-          {/* ) : ( */}
-          {/* ''
-          )}{' '} */}
-          {temperature} {unitText}
-        </Box>
-      </Grid>
-    </Grow>
+    <Grid data-test="forecastGrid" className={classes.root}>
+      <Box data-test="ForeCastCard" className={classes.title}>
+        {day}
+      </Box>
+      <Box className={classes.text}>
+        <Box className={classes.text}>{data.data.Day.IconPhrase}</Box>
+        {temperature} {unitText}
+      </Box>
+    </Grid>
   );
 };
 

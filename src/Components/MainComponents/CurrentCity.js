@@ -3,7 +3,10 @@ import { Box, Typography } from '@material-ui/core';
 const CurrentCity = ({ cityName, current, color }) => {
   return (
     <Box>
-      <Typography style={{ color: color, fontWeight: '700' }}>
+      <Typography
+        data-test="cityName"
+        style={{ color: color, fontWeight: '700' }}
+      >
         {cityName}
       </Typography>
 

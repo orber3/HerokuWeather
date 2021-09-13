@@ -6,7 +6,6 @@ import FavCityPage from './Pages/FavCityPage';
 import React, { useState } from 'react';
 import { CssBaseline, IconButton, Grid } from '@material-ui/core';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
-import { SwapHoriz } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeAction } from './Actions/ThemeAction';
@@ -70,7 +69,6 @@ function App() {
           <Router>
             <Header />
             <IconButton
-              className={classes.menuButton}
               color="inherit"
               onClick={() => {
                 changeTheme();

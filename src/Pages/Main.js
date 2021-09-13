@@ -1,6 +1,5 @@
 import {
   Box,
-  colors,
   FormControlLabel,
   Grid,
   makeStyles,
@@ -113,10 +112,10 @@ const Main = () => {
   const dispatch = useDispatch();
 
   const GetCityReducer = useSelector((state) => state.GetCityReducer);
-  const { getCityError, data, keyword } = GetCityReducer;
+  const { getCityError, data } = GetCityReducer;
 
   const CurrentCityReducer = useSelector((state) => state.CurrentCityReducer);
-  const { loading, id, city } = CurrentCityReducer;
+  const { id, city } = CurrentCityReducer;
 
   const ForeCastReducer = useSelector((state) => state.ForeCastReducer);
   const { ForecastError, foreData, loadingforeCast } = ForeCastReducer;
@@ -125,7 +124,7 @@ const Main = () => {
   const { favourites } = FavouriteReducer;
 
   const GeoReducer = useSelector((state) => state.GeoReducer);
-  const { geoData, loadingGeo } = GeoReducer;
+  const { geoData } = GeoReducer;
 
   const [metric, setMetric] = useState(true);
   let isThisCityIsFav = false;
@@ -216,7 +215,7 @@ const Main = () => {
                 checked={metric}
                 onChange={() => setMetric(!metric)}
                 name="metric"
-                color={themeState == 'primary' ? 'primary' : 'black'}
+                color={themeState == 'primary' ? 'primary' : 'default'}
               />
             }
             label={metric ? <span> &#8451; </span> : <span>&#8457;</span>}

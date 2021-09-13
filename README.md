@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+hey,
+thanks for an exciting home assignment !
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+i have completed all of the assingment specs and bounus.
+i have added a few unit tests,
+animation : for the cards and the clouds.
+cards - grow in.
+when the forecast shows that it will be raining - there will be rain animation going down inside the card.
 
-## Available Scripts
+the packages i have used in addition with React:
 
-In the project directory, you can run:
+1. redux , redux-thunk for global state management.
+2. material ui , react-bootstrap - for styling.
+3. axios - for api calls
+4. react-hook-form - for form validation.
+5. enzyme - for unit tests.
 
-### `npm start`
+project structure:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. pages:
+   I. Main - home page and for displaying default city , geolocation city and forecast.
+   II. FavoritePage - for displaying Favorites citys cards.
+   III. FavCityPage - for displaying a favorite city after click on the Favorite page.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. components:
 
-### `npm test`
+I. MainComponents: ( components mainly related to the MainPage)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1.  CurrentCity - for displaying current city name and temprature.
+2.  FavFeatures - for add \ deleting a city from the favorites
+3.  ForeCastList - rendring a list of foreCast cards - 5 days ahead.
+4.  foreCastCards - Cards with foreCast information .
+5.  SearchBox - for searching a city from the api.
 
-### `npm run build`
+II. FavoriteComponents:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. FavCard - for displaying FavCard City
+2. FavList - for displaying a list of Favcard city's.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+III.Header
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+IV.Message: for displaying errors using toast.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. Actions - all the actions of redux:
+4. reducers - all of the redux reducers.

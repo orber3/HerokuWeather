@@ -10,7 +10,6 @@ import { Slide } from '@material-ui/core';
 import Message from '../Message';
 import CircularProgerss from '@material-ui/core/CircularProgress';
 import { secondary } from '../../Colors';
-import BarChart from './BarChart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(470)]: {
       marginLeft: theme.spacing(0),
       marginRight: theme.spacing(0),
-      // fontSize: '0.5rem',
     },
   },
   paper: {
@@ -54,16 +52,6 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(0),
       marginRight: theme.spacing(0),
       // fontSize: '0.5rem',
-    },
-  },
-  chart: {
-    marginTop: '6rem',
-    width: '700px',
-    height: '500px',
-    [theme.breakpoints.down(470)]: {
-      width: '220px',
-      height: '180px',
-      overflowX: 'none',
     },
   },
 }));
@@ -104,7 +92,7 @@ const FavList = ({ FavoriteData, loading, themeState }) => {
             {FavData ? (
               FavData.map((item) => (
                 <Grid key={item.id} item>
-                  <Slide in={true} style={{ transitionDelay: '1500ms' }}>
+                  <Slide in={true} style={{ transitionDelay: '75ms' }}>
                     <Paper
                       id={item.data[0].HasPrecipitation}
                       className={paperClass ? classes.paper : classes.darkPaper}
@@ -118,11 +106,6 @@ const FavList = ({ FavoriteData, loading, themeState }) => {
               <CircularProgerss />
             )}
           </Grid>
-          <BarChart
-            data={FavData}
-            color={paperClass}
-            className={classes.chart}
-          />
         </div>
       )}
     </>
