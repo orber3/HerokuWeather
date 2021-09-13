@@ -164,7 +164,7 @@ const SearchBox = () => {
               }}
               {...register('search', {
                 pattern: {
-                  value: /^[a-zA-Z]+$/,
+                  value: /^[a-zA-Z_ ]+$/,
                   message: 'Only English letters is allowed',
                 },
               })}
