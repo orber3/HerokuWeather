@@ -46,4 +46,4 @@ IV.Message: for displaying errors using toast.
 
 LINK:
 
-http://orber3.github.io/HeroloWeather
+http://orber3.github.io/HeroloWeather/
